@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>/* Enhance body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Add a border to the alert box */
+        .alert-box {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffdddd;
+            border: 1px solid #ffaaaa;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Style alert text */
+        .alert {
+            color: #cc0000;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* Ensure .form container is centered and styled */
+        .form {
+            width: 80%;
+            max-width: 500px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Update styles for buttons */
+        .register-btn {
+            background-color: #ff6f00;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .register-btn:hover {
+            background-color: #ff8c00;
+            transform: scale(1.05);
+        }
+        
+        /* Add styles for active state of buttons */
+        .register-btn:active {
+            background-color: #e65c00;
+        }
+        
+        /* Enhance heading style */
+        .heading {
+            color: #ff6f00;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        /* Add rounded corners to input fields */
+        .input-field {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ff6f00;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus {
+            border-color: #ff8c00;
+            outline: none;
+        }
+        
+        /* Style submit button */
+        .submit-btn {
+            background-color: #ff6f00;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff8c00;
+        }
+        
+        /* Adjust layout and styling for info boxes */
+        .info-boxes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .info-box {
+            flex: 1;
+            margin: 0 10px;
+            padding: 20px;
+            background-color: #ffb74d;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
+        }
+        
+        /* Add additional styling to info-boxes */
+        .info-box:nth-child(odd) {
+            background-color: #ffb74d;
+        }
+        
+        .info-box:nth-child(even) {
+            background-color: #ffcc80;
+        }
+        
+        /* Keyframes for slideIn animation */
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        </style>
+</head>
+<body>
+    <div class="form-container student-form-container">
+        <div class="form student-form">
+            <h1 class="heading">Student Registration</h1>
+            <input type="text" placeholder="Student Name" class="input-field" required>
+            <input type="text" placeholder="Class" class="input-field" required>
+            <input type="date" placeholder="Birthdate" class="input-field" required>
+            <input type="tel" placeholder="Mobile No" class="input-field" required>
+            <input type="text" placeholder="Address" class="input-field" required>
+            <input type="text" placeholder="Blood Group" class="input-field" required>
+            <input type="text" placeholder="Parents Name" class="input-field" required>
+            <input type="tel" placeholder="Parents Mobile No" class="input-field" required>
+            <input type="email" placeholder="Email ID" class="input-field" required>
+            <input type="text" placeholder="Aadhar Number" class="input-field" required>
+            <input type="text" placeholder="City" class="input-field" required>
+            <select class="input-field" required>
+                <option value="" disabled selected>Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" placeholder="Height" class="input-field" required>
+            <input type="text" placeholder="Weight" class="input-field" required>
+            <input type="text" placeholder="Caste" class="input-field" required>
+            <button class="submit-btn">Submit</button>
+        </div>
+
+        <div class="info-boxes">
+            <div class="info-box">Student Info 1</div>
+            <div class="info-box">Student Info 2</div>
+            <div class="info-box">Student Info 3</div>
+        </div>
+    </div>
+    <script>document.querySelectorAll('.submit-btn').forEach(button => {  
+        button.addEventListener('click', function (event) {  
+            event.preventDefault();  
+            const inputs = this.closest('.form').querySelectorAll('.input-field');  
+            let valid = true;  
+            inputs.forEach(input => {  
+                if (!input.checkValidity()) {  
+                    valid = false;  
+                    input.classList.add('error');  
+                    input.reportValidity(); // Show validation message  
+                } else {  
+                    input.classList.remove('error');  
+                }  
+            });  
+    
+            if (valid) {  
+                alert('Registration successful!');  
+                // Here, you can handle form data submission to server here  
+            }  
+        });  
+    });  
+    
+    // Adding some cool animations on form load  
+    window.onload = function () {  
+        const form = document.querySelector('.form');  
+        form.style.opacity = 0;  
+        form.style.transform = 'translateY(20px)';  
+        setTimeout(() => {  
+            form.style.transition = 'opacity 0.5s, transform 0.5s';  
+            form.style.opacity = 1;  
+            form.style.transform = 'translateY(0)';  
+        }, 100);  
+    };</script>
+</body>
+</html>
